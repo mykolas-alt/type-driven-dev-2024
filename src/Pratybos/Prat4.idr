@@ -18,7 +18,10 @@ append_nil : Vect m a -> Vect (plus m 0) a
 append_nil xs = rewrite plusCommutative m 0 in xs
 
 appendXs : Vect (S (plus m len)) a -> Vect (plus m (S len)) a
-appendXs xs = rewrite sym $ plusSuccRightSucc m len in xs
+appendXs xs = replace { p = \n => Vect n a} (plusSuccRightSucc m len) xs
+
+-- appendXs : Vect (S (plus m len)) a -> Vect (plus m (S len)) a
+-- appendXs xs = rewrite sym $ plusSuccRightSucc m len in xs
 
 -- 3
 append' : Vect n a -> Vect m a -> Vect (m + n) a
