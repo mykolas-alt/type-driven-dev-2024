@@ -22,7 +22,9 @@ sameAsMap : {la : List a} ->
             {lb : List b} ->
             ListProj la op lb -> lb = map op la
 sameAsMap ListProjEmpty = Refl
-sameAsMap (ListProjSucc x a') = rewrite sameAsMap x in Refl
+sameAsMap (ListProjSucc x a') = case sameAsMap x of
+                                     Refl => Refl
+-- sameAsMap (ListProjSucc x a') = rewrite sameAsMap x in Refl
 
 lbIsLc : {la : List a} ->
          {op : a -> b} ->
