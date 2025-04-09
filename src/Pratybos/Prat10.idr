@@ -3,6 +3,7 @@ module Pratybos.Prat10
 import Data.Nat 
 import Data.List.Views
 import Data.List
+import Data.Stream
 
 %default total
 
@@ -13,7 +14,8 @@ everyOther (x :: y) = x :: everyOther (skipOne y)
     skipOne (z :: w) = w
 
 sqrt : (n : Double) -> (a : Double) -> Stream Double
-sqrt n a = let a' = (n + (a / n)) / 2 in a' :: sqrt a' a
+sqrt n a = iterate (\x => (x + a / x) / 2) n
+-- sqrt n a = let a' = (n + (a / n)) / 2 in a' :: sqrt a' a
 
 boundedSqrt : (n : Nat) -> (delta : Double) -> (x : Double) -> Double
 boundedSqrt 0 delta x = x
